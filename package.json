@@ -7,7 +7,9 @@
   "license": "MIT",
   "scripts": {
     "build": "cross-env NODE_ENV=production rimraf dist && webpack --mode production",
-    "dev": "cross-env ENV=development webpack-dev-server --mode development --watch"
+    "dev:server": "cross-env ENV=development webpack-dev-server --mode development --watch",
+    "dev": "cross-env ENV=development webpack --mode development --watch",
+    "server": "nodemon index.js"
   },
   "dependencies": {
     "@babel/core": "^7.8.4",
@@ -15,18 +17,26 @@
     "@babel/preset-react": "^7.8.3",
     "autoprefixer": "^9.7.4",
     "babel-loader": "^8.0.6",
+    "body-parser": "^1.19.0",
+    "canvas": "^2.6.1",
+    "classnames": "^2.2.6",
+    "core-js": "^3.6.4",
     "cross-env": "^7.0.0",
     "css-loader": "^3.4.2",
     "cssnano": "^4.1.10",
+    "downloadjs": "^1.4.7",
     "express": "^4.17.1",
     "html-loader": "^0.5.5",
     "html-webpack-plugin": "^3.2.0",
     "image-webpack-loader": "^6.0.0",
     "mini-css-extract-plugin": "^0.9.0",
+    "node-sass": "^4.13.1",
+    "nodemon": "^2.0.2",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
     "postcss-loader": "^3.0.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "sass-loader": "^8.0.2",
     "webpack": "^4.41.6",
     "webpack-dev-server": "^3.10.3",
     "webpack-md5-hash": "^0.0.6"
