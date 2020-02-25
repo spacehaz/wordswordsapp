@@ -1,0 +1,10 @@
+@font-face {
+	font-family: 'Geometria';
+	src: url('./Geometria.eot');
+	src: local('Geometria'),
+		url('./Geometria.eot?#iefix') format('embedded-opentype'),
+		url('./Geometria.woff') format('woff'),
+		url('./Geometria.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
