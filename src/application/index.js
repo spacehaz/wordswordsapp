@@ -45,7 +45,7 @@ class Application extends React.Component {
 		fetch('/api/generate-image', { body: JSON.stringify({ word, hex: colorHex }), method: 'POST', headers: { 'Content-Type': 'application/json' } })
 			.then(response => response.blob())
 		  .then(blob => {
-		    download(blob)  
+		    download(blob, `${word}_word.png`, 'image/png')  
 		  })
 		  .finally(_ => callback && callback())
 	}
