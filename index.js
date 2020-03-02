@@ -3,7 +3,8 @@ const app = express();
 const port = 3003;
 const path = require('path')
 const bodyParser = require('body-parser')
-const { createCanvas } = require("canvas")
+const { createCanvas, registerFont } = require("canvas")
+registerFont('./src/fonts/Geometria.ttf', { family: 'Geometria' })
 
 app.use(express.static('public'));
 app.use(bodyParser.json())
@@ -23,10 +24,10 @@ app.post('/api/generate-image', (req, res, next) => {
 	ctx.fillStyle = hex;
 	ctx.fillRect(0, 0, WIDTH, HEIGHT);
 	ctx.fillStyle = "#FEFEFE";
-	ctx.font = "108px Arial";
+	ctx.font = "108px Geometria";
 	ctx.textAlign = 'center';
 	ctx.textBaseline = 'middle';
-	ctx.fillText(word.toUpperCase(), parseInt(WIDTH / 2), parseInt(HEIGHT / 2))
+	ctx.fillText(word, parseInt(WIDTH / 2), parseInt(HEIGHT / 2))
 	const buffer = canvas.toBuffer("image/png")
 	res.status(200).send(buffer)
 })

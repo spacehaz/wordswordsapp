@@ -4,10 +4,12 @@ import styles from './styles.module.scss'
 
 class Input extends React.Component {
 	render () {
-		const { title } = this.props
+		const { title, disabled } = this.props
 		return <div>
 			{title && <div className={styles.title}>{title}</div>}
-			<input className={styles.container} onChange={(e) => this.onChange({ e })} />
+			<input disabled={disabled} className={classNames(styles.container, {
+				[styles.disabled]: disabled
+			})} onChange={(e) => this.onChange({ e })} />
 		</div>
 	}
 
