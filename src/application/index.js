@@ -1,5 +1,5 @@
 import React from 'react'
-import { Header, Button, Input } from './components'
+import { Header, Button, Input, Checkbox, Popup } from './components'
 import './styles.css'
 
 class Application extends React.Component {
@@ -8,15 +8,28 @@ class Application extends React.Component {
 		this.state = {
 			word: '',
 			translation: '',
-			hex: ''
+			hex: '',
+			users: []
 		}
 	}
 
+	componentDidMount () {
+		fetch('/data').then(res => res.json()).then(data => this.setState({
+			users: data
+		}))
+	}
+
 	render () {
-		const { word, translation, hex } = this.state
+		const { word, translation, hex, users } = this.state
 
 		return <div className='content'>
+			<Popup title='my modal window'>
+				asdsadasdsa
+			</Popup>
 			<Header title='WordsWords App' />
+			<div>
+				{users.map(user => <div>{user.name}. age: {user.age}</div>)}
+			</div>
 			<div className='content__body'>
 				<Input
 					title='Word'
@@ -34,6 +47,7 @@ class Application extends React.Component {
 					placeholder='Type hex (only digits)'
 					change={value => this.setState({ hex: value })}
 				/>
+				<Checkbox title='this is checkbox' />
 
 			{/* new Input({ title: 'Color-hex', placeholder: 'Type hex (only digits)' })*/}
 			</div>

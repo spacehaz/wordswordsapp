@@ -5,6 +5,13 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const { createCanvas } = require('canvas')
 
+const data = [
+	{name: 'Mark', age: 13},
+	{name: 'John', age: 14},
+	{name: 'Sarah', age: 15},
+	{name: 'Boris', age: 21},
+]
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -21,6 +28,10 @@ app.post('/generate-image', (req, res, next) => {
   ctx.fillText(word, 1080 / 2, 1080 / 2);
 
 	// res.status(200).send({ word, translation, hex })
+})
+
+app.get('/data', (req, res) => {
+	res.json(data)
 })
 
 app.get('*', (req, res, next) => {

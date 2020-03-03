@@ -1,5 +1,5 @@
 import React from 'react'
-import './styles.css'
+import styles from './styles.module.scss'
 
 class Header extends React.Component {
 	render () {
@@ -7,6 +7,7 @@ class Header extends React.Component {
 
 		return <header className='header'>
 			{title}
+			<button className={styles.button}>Sign up</button>
 		</header>
 	}
 }

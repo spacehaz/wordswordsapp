@@ -3,10 +3,38 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const webpack = require('webpack');
-const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const cssnano = require('cssnano');
+const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin')
+const cssnano = require('cssnano')
+const autoprefixer = require('autoprefixer')
 
-const isDev = process.env.NODE_ENV === 'development';
+
+const isDev = process.env.NODE_ENV === 'development'
+
+const CSSModuleLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: true
+  }
+}
+
+const CSSLoader = {
+  loader: 'css-loader',
+  options: {
+    modules: false
+  }
+}
+
+const postCSSLoader = {
+  loader: 'postcss-loader',
+  options: {
+    ident: 'postcss',
+    sourceMap: true,
+    plugins: () => [
+      autoprefixer()
+    ]
+  }
+}
+
 
 module.exports = {
   entry: {
@@ -14,7 +42,7 @@ module.exports = {
   },
   output: {
     path: path.resolve(__dirname, 'public'),
-    filename: '[name]/[name].[chunkhash].js'
+    filename: '[name]/[name].js'
   },
   module: {
     rules: [
@@ -24,14 +52,23 @@ module.exports = {
         use: {
           loader: 'babel-loader',
         },
-      },
-      {
-        test: /\.css$/i,
+      }, {
+        test: /\.(scss|css)$/,
+        exclude: /\.module\.scss$/,
         use: [
           isDev ? { loader: 'style-loader' } : { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
-          'css-loader',
-          'postcss-loader',
-        ],
+          CSSLoader,
+          'sass-loader',
+          postCSSLoader
+        ]
+      }, {
+        test: /\.module\.scss$/,
+        use: [
+          isDev ? { loader: 'style-loader' } : { loader: MiniCssExtractPlugin.loader, options: { publicPath: '../' } },
+          CSSModuleLoader,
+          'sass-loader',
+          postCSSLoader
+        ]
       },
       {
         test: /\.(png|jpg|gif|ico|svg)$/,
@@ -72,7 +109,7 @@ module.exports = {
   },
   plugins: [
     new MiniCssExtractPlugin({
-      filename: '[name]/[name].[contenthash].css',
+      filename: '[name]/[name].css',
     }),
     new HtmlWebpackPlugin({
       inject: false,
