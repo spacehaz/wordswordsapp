@@ -35,11 +35,12 @@ class Application extends React.Component {
 					<Button title='Clear' onClick={_ => window.location.href = '/' }/>
 				</div>
 				{preview && <div className={styles.canvas}>
-					<Canvas word={word} hex={colorHex} />
-					<Canvas word={translation} hex={colorHex} />
-					<Button title='Save' onClick={_ => {
-						this.save({ word, colorHex, callback: _ => this.save({ word: translation, colorHex }) })
-					}} />
+					<div onClick={_ => this.save({ word, colorHex})}>
+						<Canvas word={word} hex={colorHex} />
+					</div>
+					<div onClick={_ => this.save({ word: translation, colorHex })}>
+						<Canvas word={translation} hex={colorHex} />
+					</div>
 				</div>}
 			</div>
 		</div>
@@ -67,7 +68,9 @@ class Application extends React.Component {
 		  .then(blob => {
 		    download(blob, `${word}_word.png`, 'image/png')  
 		  })
-		  .finally(_ => callback && callback())
+		  .finally(_ => {
+		  	callback && callback()
+		  })
 	}
 }
 
