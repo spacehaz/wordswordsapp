@@ -9,7 +9,7 @@ class Canvas extends React.Component {
     const ctx = canvas.getContext("2d")
     ctx.fillStyle = hex;
     ctx.fillRect(0, 0, width, height)
-    ctx.fillStyle = "#FEFEFE"
+    ctx.fillStyle = "rgba(255,255,255,0.9)"
     ctx.font = "32px Geometria"
     ctx.textAlign = 'center'
     ctx.textBaseline = 'middle'
