@@ -17,7 +17,7 @@ app.get('*', (req, res, next) => {
 
 app.post('/api/generate-image', (req, res, next) => {
   const WIDTH = 1080;
-  const HEIGHT = 1080;
+  const HEIGHT = 1920;
   const { hex = "#222222" , word = '' } = req.body
   const canvas = createCanvas(WIDTH, HEIGHT);
   const ctx = canvas.getContext("2d");
